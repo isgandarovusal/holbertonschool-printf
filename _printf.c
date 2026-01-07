@@ -28,21 +28,18 @@ int _printf(const char *format, ...)
 				return (-1);
 			}
 			
-			switch (format[i])
+			if (format[i] == 'c')
+				count += print_char(args);
+			else if (format[i] == 's')
+				count += print_string(args);
+			else if (format[i] == '%')
+				count += print_percent();
+			else if (format[i] == 'd' || format[i] == 'i')
+				count += print_int(args);
+			else
 			{
-				case 'c':
-					count += print_char(args);
-					break;
-				case 's':
-					count += print_string(args);
-					break;
-				case '%':
-					count += print_percent();
-					break;
-				default:
-					count += _putchar('%');
-					count += _putchar(format[i]);
-					break;
+				count += _putchar('%');
+				count += _putchar(format[i]);
 			}
 		}
 		else

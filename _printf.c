@@ -1,18 +1,16 @@
 #include "main.h"
-#include <stdarg.h>
 
 /**
- * _printf - produces output according to a format
- * @format: format string containing the characters and the specifiers
- * Description: this function will call the get_print() function that will
- * determine which printing function to call depending on the conversion
- * specifiers contained into fmt
- * Return: length of the formatted output string
+ * _printf - Custom printf function
+ * @format: Format string
+ *
+ * Return: Number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, length = 0;
+	int count = 0;
+	int i = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -25,24 +23,35 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == '\0')
-				return (-1);
-			
-			if (format[i] == 'c')
-				length += print_char(args);
-			else if (format[i] == 's')
-				length += print_string(args);
-			else if (format[i] == '%')
-				length += print_37();
-			else
 			{
-				length += _putchar('%');
-				length += _putchar(format[i]);
+				va_end(args);
+				return (-1);
+			}
+			
+			switch (format[i])
+			{
+				case 'c':
+					count += print_char(args);
+					break;
+				case 's':
+					count += print_string(args);
+					break;
+				case '%':
+					count += print_percent();
+					break;
+				default:
+					count += _putchar('%');
+					count += _putchar(format[i]);
+					break;
 			}
 		}
 		else
-			length += _putchar(format[i]);
+		{
+			count += _putchar(format[i]);
+		}
 		i++;
 	}
+
 	va_end(args);
-	return (length);
+	return (count);
 }

@@ -1,22 +1,23 @@
 #include "main.h"
 
 /**
- * print_string - prints string
- * @val: arguments
- * Return: length of the string
+ * print_string - Prints a string
+ * @args: Argument list
+ *
+ * Return: Number of characters printed
  */
-int print_string(va_list val)
+int print_string(va_list args)
 {
-	char *str = va_arg(val, char *);
-	int length = 0, i;
+	char *str = va_arg(args, char *);
+	int count = 0;
 
 	if (str == NULL)
 		str = "(null)";
 
-	for (i = 0; str[i] != '\0'; i++)
+	while (*str)
 	{
-		_putchar(str[i]);
-		length++;
+		count += _putchar(*str);
 	}
-	return (length);
+
+	return (count);
 }

@@ -1,0 +1,35 @@
+.TH _PRINTF 3 "January 2024"
+.SH NAME
+_printf \- formatted output conversion
+.SH SYNOPSIS
+.nf
+.B #include "main.h"
+.PP
+.BI "int _printf(const char *" format ", ...);"
+.fi
+.SH DESCRIPTION
+The _printf() function produces output according to a format string.
+.SH SPECIFIERS
+.TP
+.B %c
+Prints a single character.
+.TP
+.B %s
+Prints a string.
+.TP
+.B %%
+Prints a percent sign.
+.SH RETURN VALUE
+Returns the number of characters printed.
+.SH EXAMPLES
+To print a string:
+.PP
+.in +4n
+.EX
+_printf("%s\\\\n", "Hello, world!");
+.EE
+.in
+.SH SEE ALSO
+.BR printf (3)
+.SH AUTHORS
+Usal Isgandarov
